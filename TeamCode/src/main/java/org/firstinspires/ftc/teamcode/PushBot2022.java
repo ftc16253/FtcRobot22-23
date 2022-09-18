@@ -5,6 +5,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+
 class PushBot2022 {
    /* Public OpMode members. */
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
@@ -28,14 +33,31 @@ class PushBot2022 {
 
    ElapsedTime PIDtimer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
 
+   public OpenCvCamera webcam;
+   public ColorDetector detector = new ColorDetector();
+   public double leftTotal, centerTotal;
+   public String place;
+
 
    /* local OpMode members. */
 
-   HardwareMap hwMap = null;
-   private ElapsedTime period = new ElapsedTime();
+   HardwareMap hwMap           =  null;
+   private ElapsedTime period  = new ElapsedTime();
 
-   public void init(HardwareMap ahwMap) {
+   /* Initialize standard Hardware interfaces */
+   public void init(HardwareMap ahwMap, boolean isAuto) {
+      // Save reference to Hardware map
       hwMap = ahwMap;
+
+      int cameraMonitorViewId = ahwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", ahwMap.appContext.getPackageName());
+      webcam = OpenCvCameraFactory.getInstance().createWebcam(ahwMap.get(WebcamName.class, "Webcam 2021"), cameraMonitorViewId);
+      webcam.openCameraDevice();
+      if (isAuto) {
+         webcam.setPipeline(detector);
+         webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+      }
+
+
       //DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
       frontLeftMec = hwMap.get(DcMotor.class, "frontLeftMec");
       frontRightMec = hwMap.get(DcMotor.class, "frontRightMec");

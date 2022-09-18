@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class Drive2022 extends LinearOpMode {
     PushBot2022 bot = new PushBot2022();
     public void runOpMode() {
-        bot.init(hardwareMap);
+        bot.init(hardwareMap, false);
 
         waitForStart();
 
