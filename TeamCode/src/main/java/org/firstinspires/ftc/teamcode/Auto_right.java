@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-public class Auto2022 extends LinearOpMode {
+public class Auto_right extends LinearOpMode {
    PushBot2022 bot = new PushBot2022();
    int t=0;
 
