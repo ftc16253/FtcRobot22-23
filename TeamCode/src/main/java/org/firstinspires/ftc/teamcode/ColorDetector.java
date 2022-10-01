@@ -50,10 +50,10 @@ public class ColorDetector extends OpenCvPipeline {
         }
 */
 
-        if (centerTotal > 250000) {
+        if (centerTotal > 215000) {
             //Blue
             position = "ONE";
-        } else if (centerTotal > 150000){
+        } else if (centerTotal > 160000){
             //Green
             position = "THREE";
         } else {
