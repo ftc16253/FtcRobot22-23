@@ -10,7 +10,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class ColorDetector extends OpenCvPipeline {
     private Mat workingMatrix = new Mat();
     public String position = "";
-    public double leftTotal, centerTotal, rightTotal;
+    public double centerTotal;
     public ColorDetector(){
 
     }

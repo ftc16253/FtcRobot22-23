@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -12,6 +13,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 class PushBot2022 {
    /* Public OpMode members. */
+
+   public Servo grabber;
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
    double spinDiameter = 1;
    double diameter = 3.77953;
@@ -64,17 +67,17 @@ class PushBot2022 {
       backLeftMec = hwMap.get(DcMotor.class, "backLeftMec");
       backRightMec = hwMap.get(DcMotor.class, "backRightMec");
 
-      frontLeftMec.setDirection(DcMotor.Direction.REVERSE);
-      frontRightMec.setDirection(DcMotor.Direction.FORWARD);
-      backLeftMec.setDirection(DcMotor.Direction.REVERSE);
-      backRightMec.setDirection(DcMotor.Direction.FORWARD);
+      frontLeftMec.setDirection(DcMotor.Direction.FORWARD);
+      frontRightMec.setDirection(DcMotor.Direction.REVERSE);
+      backLeftMec.setDirection(DcMotor.Direction.FORWARD);
+      backRightMec.setDirection(DcMotor.Direction.REVERSE);
 
       frontRightMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       frontLeftMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       backRightMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       backLeftMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-      frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      /*frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       backRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       backLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -82,13 +85,15 @@ class PushBot2022 {
       frontLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       frontRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       backRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-      backLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      backLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
 
       //set power to zero
       frontLeftMec.setPower(0);
       frontRightMec.setPower(0);
       backLeftMec.setPower(0);
       backRightMec.setPower(0);
+
+      grabber=hwMap.get(Servo.class,"grabber");
 
    }
 

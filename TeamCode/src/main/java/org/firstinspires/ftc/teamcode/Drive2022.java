@@ -18,7 +18,7 @@ public class Drive2022 extends LinearOpMode {
             }
             if (gamepad1.left_stick_x != 0){
                 //bot.PIDTurn(gamepad1.right_stick_x);
-                bot.turn(gamepad1.right_stick_x);
+                bot.turn(gamepad1.left_stick_x);
             }
             /*if (gamepad1.right_stick_x > 0 && gamepad1.right_stick_y > 0) {
                 //move forward diagonally to the right
@@ -44,14 +44,25 @@ public class Drive2022 extends LinearOpMode {
                // bot.PIDbl(-.9);
                 bot.frontRightMec.setPower(-1);
                 bot.backLeftMec.setPower(-1);
-            }else */if (gamepad1.right_stick_x != 0){
+            }else */
+            if (gamepad1.right_stick_x != 0){
                 bot.moveSide(gamepad1.right_stick_x);
             }
-            else{
+            if (gamepad1.right_stick_y == 0 && gamepad1.right_stick_x == 0 && gamepad1.left_stick_x == 0){
                 bot.frontRightMec.setPower(0);
                 bot.frontLeftMec.setPower(0);
                 bot.backLeftMec.setPower(0);
                 bot.backRightMec.setPower(0);
+            }
+
+            if (gamepad1.a){
+
+                bot.grabber.setPosition(0);
+            }
+
+            if (gamepad1.b) {
+
+                bot.grabber.setPosition(.32);
             }
         }
     }

@@ -41,7 +41,7 @@ public class TestCamera extends LinearOpMode {
          public void onOpened()
          {
             // Usually this is where you'll want to start streaming from the camera (see section 4)
-            //camera.openCameraDevice();
+            camera.openCameraDevice();
             camera.setPipeline(detector);
             camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
          }
