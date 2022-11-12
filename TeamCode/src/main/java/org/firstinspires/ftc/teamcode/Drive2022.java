@@ -46,7 +46,7 @@ public class Drive2022 extends LinearOpMode {
                 bot.backLeftMec.setPower(-1);
             }else */
             if (gamepad1.right_stick_x != 0){
-                bot.moveSide(gamepad1.right_stick_x);
+                bot.moveSide(-gamepad1.right_stick_x);
             }
             if (gamepad1.right_stick_y == 0 && gamepad1.right_stick_x == 0 && gamepad1.left_stick_x == 0){
                 bot.frontRightMec.setPower(0);
@@ -62,7 +62,7 @@ public class Drive2022 extends LinearOpMode {
 
             if (gamepad1.b) {
 
-                bot.grabber.setPosition(.32);
+                bot.grabber.setPosition(.36);
             }
         }
     }

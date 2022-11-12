@@ -23,6 +23,37 @@ public class Auto_right extends LinearOpMode {
             telemetry.update();
             t = t + 1;
          }
+
+         bot.moveForward(1);
+         sleep(700);
+         bot.moveForward(.25);
+         sleep(150);
+         bot.moveForward(0);
+         bot.frontLeftMec.setPower(.5);
+         bot.backLeftMec.setPower(.5);
+         sleep(1250);
+         bot.backLeftMec.setPower(0);
+         bot.frontLeftMec.setPower(0);
+         sleep(100);
+         bot.frontLeftMec.setPower(-.5);
+         bot.backLeftMec.setPower(-.5);
+         sleep(1250);
+         bot.backLeftMec.setPower(0);
+         bot.frontLeftMec.setPower(0);
+         sleep(1000);
+         if (bot.place == "ONE"){
+            bot.moveSide(1);
+            sleep(500);
+            bot.moveSide(0);
+         }
+         if (bot.place == "TWO"){
+
+         }
+         if (bot.place == "THREE"){
+            bot.moveSide(-1);
+            sleep(600);
+            bot.moveSide(0);
+         }
          //bot.PIDX(48);
          sleep(30000);
       }

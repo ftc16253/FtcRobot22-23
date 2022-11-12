@@ -67,10 +67,10 @@ class PushBot2022 {
       backLeftMec = hwMap.get(DcMotor.class, "backLeftMec");
       backRightMec = hwMap.get(DcMotor.class, "backRightMec");
 
-      frontLeftMec.setDirection(DcMotor.Direction.FORWARD);
-      frontRightMec.setDirection(DcMotor.Direction.REVERSE);
-      backLeftMec.setDirection(DcMotor.Direction.FORWARD);
-      backRightMec.setDirection(DcMotor.Direction.REVERSE);
+      frontLeftMec.setDirection(DcMotor.Direction.REVERSE);
+      frontRightMec.setDirection(DcMotor.Direction.FORWARD);
+      backLeftMec.setDirection(DcMotor.Direction.REVERSE);
+      backRightMec.setDirection(DcMotor.Direction.FORWARD);
 
       frontRightMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       frontLeftMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
