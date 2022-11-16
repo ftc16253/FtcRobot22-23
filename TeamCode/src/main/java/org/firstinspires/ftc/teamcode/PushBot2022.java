@@ -27,7 +27,8 @@ class PushBot2022 {
    double integral = 0;
    double lastError = 0;
    double Distance;
-
+   double grabberOpenPos = 0;
+   double grabberClosePos = 0.36;
    double totalRotations = Distance / circumference;
    double rotationDistanceofWheel = (andyMark40Tics * totalRotations);
 
@@ -94,7 +95,7 @@ class PushBot2022 {
       backRightMec.setPower(0);
 
       grabber=hwMap.get(Servo.class,"grabber");
-
+      grabber.setPosition(grabberClosePos);
    }
 
    public void moveForward(double power) {

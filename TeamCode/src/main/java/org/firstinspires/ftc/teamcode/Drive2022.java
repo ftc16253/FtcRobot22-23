@@ -57,12 +57,12 @@ public class Drive2022 extends LinearOpMode {
 
             if (gamepad1.a){
 
-                bot.grabber.setPosition(0);
+                bot.grabber.setPosition(bot.grabberOpenPos);
             }
 
             if (gamepad1.b) {
 
-                bot.grabber.setPosition(.36);
+                bot.grabber.setPosition(bot.grabberClosePos);
             }
         }
     }
