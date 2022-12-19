@@ -12,13 +12,30 @@ public class Drive2022 extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            if (gamepad1.right_stick_y != 0){
-                // bot.PIDTot(gamepad1.right_stick_y);
-                bot.moveForward(gamepad1.right_stick_y);
+            if (bot.robotSpeed == .5 && gamepad1.right_bumper == true){
+                bot.robotSpeed = 0.75;
+                sleep(200);
             }
-            if (gamepad1.left_stick_x != 0){
+            if (bot.robotSpeed == .75 && gamepad1.right_bumper == true){
+                bot.robotSpeed = 1;
+                sleep(200);
+            }
+            if (bot.robotSpeed == 1 && gamepad1.left_bumper == true){
+                bot.robotSpeed = 0.75;
+                sleep(200);
+            }
+            if (bot.robotSpeed == 0.75 && gamepad1.left_bumper == true){
+                bot.robotSpeed = 0.5;
+                sleep(200);
+            }
+
+            if (gamepad1.left_stick_y != 0){
+                // bot.PIDTot(gamepad1.right_stick_y);
+                bot.moveForward(-gamepad1.left_stick_y * bot.robotSpeed);
+            }
+            if (gamepad1.right_stick_x != 0){
                 //bot.PIDTurn(gamepad1.right_stick_x);
-                bot.turn(gamepad1.left_stick_x);
+                bot.turn(gamepad1.right_stick_x * bot.robotSpeed);
             }
             /*if (gamepad1.right_stick_x > 0 && gamepad1.right_stick_y > 0) {
                 //move forward diagonally to the right
@@ -45,24 +62,37 @@ public class Drive2022 extends LinearOpMode {
                 bot.frontRightMec.setPower(-1);
                 bot.backLeftMec.setPower(-1);
             }else */
-            if (gamepad1.right_stick_x != 0){
-                bot.moveSide(-gamepad1.right_stick_x);
+            if (gamepad1.left_stick_x != 0){
+                bot.moveSide(-gamepad1.left_stick_x * bot.robotSpeed);
             }
-            if (gamepad1.right_stick_y == 0 && gamepad1.right_stick_x == 0 && gamepad1.left_stick_x == 0){
+            if (gamepad1.left_stick_y == 0 && gamepad1.right_stick_x == 0 && gamepad1.left_stick_x == 0){
                 bot.frontRightMec.setPower(0);
                 bot.frontLeftMec.setPower(0);
                 bot.backLeftMec.setPower(0);
                 bot.backRightMec.setPower(0);
             }
 
-            if (gamepad1.a){
-
+            //Open grabber
+            if (gamepad2.a){
                 bot.grabber.setPosition(bot.grabberOpenPos);
             }
-
-            if (gamepad1.b) {
-
+            //Close grabber
+            if (gamepad2.b) {
                 bot.grabber.setPosition(bot.grabberClosePos);
+            }
+
+            //Move linear slide up and down
+            if (gamepad2.left_stick_y > 0){
+                bot.linearRight.setPower(gamepad2.left_stick_y);
+                bot.linearLeft.setPower(gamepad2.left_stick_y);
+            }
+            if (gamepad2.left_stick_y < 0){
+                bot.linearRight.setPower(gamepad2.left_stick_y / 2);
+                bot.linearLeft.setPower(gamepad2.left_stick_y / 2);
+            }
+            else {
+                bot.linearRight.setPower(0);
+                bot.linearLeft.setPower(0);
             }
         }
     }

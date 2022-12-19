@@ -16,6 +16,7 @@ class PushBot2022 {
 
    public Servo grabber;
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
+   public DcMotor linearLeft, linearRight;
    double spinDiameter = 1;
    double diameter = 3.77953;
    double circumference = diameter * 3.14;
@@ -31,6 +32,7 @@ class PushBot2022 {
    double grabberClosePos = 0.36;
    double totalRotations = Distance / circumference;
    double rotationDistanceofWheel = (andyMark40Tics * totalRotations);
+   double robotSpeed = 0.5 ;
 
    public static PIDCoefficients pidC = new PIDCoefficients(5, 1, 0);
    public PIDCoefficients pidGain = new PIDCoefficients(0, 0, 0);
@@ -68,15 +70,22 @@ class PushBot2022 {
       backLeftMec = hwMap.get(DcMotor.class, "backLeftMec");
       backRightMec = hwMap.get(DcMotor.class, "backRightMec");
 
-      frontLeftMec.setDirection(DcMotor.Direction.REVERSE);
-      frontRightMec.setDirection(DcMotor.Direction.FORWARD);
-      backLeftMec.setDirection(DcMotor.Direction.REVERSE);
-      backRightMec.setDirection(DcMotor.Direction.FORWARD);
+      frontLeftMec.setDirection(DcMotor.Direction.FORWARD);
+      frontRightMec.setDirection(DcMotor.Direction.REVERSE);
+      backLeftMec.setDirection(DcMotor.Direction.FORWARD);
+      backRightMec.setDirection(DcMotor.Direction.REVERSE);
 
       frontRightMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       frontLeftMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       backRightMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       backLeftMec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+      linearLeft = hwMap.get(DcMotor.class, "linearLeft");
+      linearRight = hwMap.get(DcMotor.class, "linearRight");
+      linearLeft.setDirection(DcMotor.Direction.REVERSE);
+      linearRight.setDirection(DcMotor.Direction.FORWARD);
+      linearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+      linearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
       /*frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -93,16 +102,18 @@ class PushBot2022 {
       frontRightMec.setPower(0);
       backLeftMec.setPower(0);
       backRightMec.setPower(0);
+      linearLeft.setPower(0);
+      linearRight.setPower(0);
 
       grabber=hwMap.get(Servo.class,"grabber");
-      grabber.setPosition(grabberClosePos);
+      grabber.setPosition(grabberOpenPos);
    }
 
    public void moveForward(double power) {
-      frontLeftMec.setPower(power);
-      frontRightMec.setPower(power);
-      backLeftMec.setPower(power);
-      backRightMec.setPower(power);
+      frontLeftMec.setPower(-power);
+      frontRightMec.setPower(-power);
+      backLeftMec.setPower(-power);
+      backRightMec.setPower(-power);
    }
 
    public void turn(double power) {
@@ -174,12 +185,16 @@ class PushBot2022 {
    }
 
    public void moveSide(double power) {
-      frontLeftMec.setPower(-power);
-      frontRightMec.setPower(power);
-      backLeftMec.setPower(power);
-      backRightMec.setPower(-power);
+      frontLeftMec.setPower(power);
+      frontRightMec.setPower(-power);
+      backLeftMec.setPower(-power);
+      backRightMec.setPower(power);
    }
 
+   public void LinearSlide(double power){
+      linearLeft.setPower(power);
+      linearRight.setPower(power);
+   }
    public void PIDTot (double targetV){
       PIDfl(targetV);
       PIDfr(targetV);

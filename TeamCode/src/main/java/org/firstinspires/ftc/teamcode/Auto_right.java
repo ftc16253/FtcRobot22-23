@@ -24,18 +24,20 @@ public class Auto_right extends LinearOpMode {
             t = t + 1;
          }
 
+         bot.grabber.setPosition(bot.grabberClosePos);
+         sleep(200);
          bot.moveForward(1);
          sleep(1100);
          //At the last tile in the zone
          bot.moveForward(0);
          sleep(500);
          bot.moveForward(-1);
-         sleep(200);
+         sleep(225);
          bot.moveForward(0);
          sleep(100);
          //Move in front of ground station
          bot.moveSide(-1);
-         sleep(340);
+         sleep(350);
          bot.moveSide(0);
          sleep(100);
          //drop cone
@@ -43,17 +45,17 @@ public class Auto_right extends LinearOpMode {
          sleep(1000);
          if (bot.place == "ONE"){
             bot.moveSide(1);
-            sleep(1000);
+            sleep(900);
             bot.moveSide(0);
          }
          if (bot.place == "TWO"){
             bot.moveSide(1);
-            sleep(500);
+            sleep(300);
             bot.moveSide(0);
          }
          if (bot.place == "THREE"){
             bot.moveSide(-1);
-            sleep(250);
+            sleep(300);
             bot.moveSide(0);
          }
          //bot.PIDX(48);
