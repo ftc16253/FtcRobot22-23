@@ -71,6 +71,9 @@ public class Drive2022 extends LinearOpMode {
                 bot.backLeftMec.setPower(0);
                 bot.backRightMec.setPower(0);
             }
+            if (bot.Limit.isPressed() == true && gamepad2.left_stick_y < 0){
+                bot.LinearSlide(0);
+            }
 
             //Open grabber
             if (gamepad2.a){

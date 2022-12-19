@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -17,6 +18,7 @@ class PushBot2022 {
    public Servo grabber;
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
    public DcMotor linearLeft, linearRight;
+   public TouchSensor Limit;
    double spinDiameter = 1;
    double diameter = 3.77953;
    double circumference = diameter * 3.14;
@@ -32,7 +34,7 @@ class PushBot2022 {
    double grabberClosePos = 0.36;
    double totalRotations = Distance / circumference;
    double rotationDistanceofWheel = (andyMark40Tics * totalRotations);
-   double robotSpeed = 0.5 ;
+   double robotSpeed = 0.5;
 
    public static PIDCoefficients pidC = new PIDCoefficients(5, 1, 0);
    public PIDCoefficients pidGain = new PIDCoefficients(0, 0, 0);
@@ -82,10 +84,11 @@ class PushBot2022 {
 
       linearLeft = hwMap.get(DcMotor.class, "linearLeft");
       linearRight = hwMap.get(DcMotor.class, "linearRight");
-      linearLeft.setDirection(DcMotor.Direction.REVERSE);
+      linearLeft.setDirection(DcMotor.Direction.FORWARD);
       linearRight.setDirection(DcMotor.Direction.FORWARD);
       linearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       linearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
       /*frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
