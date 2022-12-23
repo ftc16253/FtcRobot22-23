@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -18,7 +17,7 @@ class PushBot2022 {
    public Servo grabber;
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
    public DcMotor linearLeft, linearRight;
-   public TouchSensor Limit;
+   //public TouchSensor Limit;
    double spinDiameter = 1;
    double diameter = 3.77953;
    double circumference = diameter * 3.14;
@@ -195,8 +194,8 @@ class PushBot2022 {
    }
 
    public void LinearSlide(double power){
-      linearLeft.setPower(power);
-      linearRight.setPower(power);
+      linearLeft.setPower(-power);
+      linearRight.setPower(-power);
    }
    public void PIDTot (double targetV){
       PIDfl(targetV);
