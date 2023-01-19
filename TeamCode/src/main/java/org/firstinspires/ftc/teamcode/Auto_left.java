@@ -26,7 +26,7 @@ public class Auto_left extends LinearOpMode {
             bot.grabber.setPosition(bot.grabberClosePos);
             sleep(1000);
             bot.moveForward(.75);
-            sleep(1220);
+            sleep(1125);
             //At the last tile in the zone
             bot.moveForward(0);
             sleep(500);
@@ -51,6 +51,19 @@ public class Auto_left extends LinearOpMode {
             sleep(1250);
             bot.LinearSlide(0);
             sleep(200);
+            /*
+            bot.moveSide(1);
+            sleep(700);
+            bot.moveSide(0);
+            sleep(100);
+            bot.turn(0.75);
+            sleep(300);
+            bot.turn(0);
+            bot.LinearSlide(1);
+            sleep(200);
+            bot.LinearSlide(0);
+            bot.grabberClosePos
+            */
             if (bot.place == "ONE"){
                 bot.moveSide(1);
                 sleep(800);

@@ -27,7 +27,7 @@ public class Auto_right extends LinearOpMode {
          bot.grabber.setPosition(bot.grabberClosePos);
          sleep(1000);
          bot.moveForward(.75);
-         sleep(1220);
+         sleep(1100);
          //At the last tile in the zone
          bot.moveForward(0);
          sleep(500);
@@ -38,7 +38,7 @@ public class Auto_right extends LinearOpMode {
          sleep(200);
          //Move in front of ground station
          bot.moveSide(1);
-         sleep(280);
+         sleep(300);
          bot.moveSide(0);
          sleep(1750);
          bot.LinearSlide(-0.25);
