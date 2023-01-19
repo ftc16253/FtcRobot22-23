@@ -19,20 +19,20 @@ class PushBot2022 {
    public DcMotor linearLeft, linearRight;
    //public TouchSensor Limit;
    double spinDiameter = 1;
-   double diameter = 3.77953;
+   double diameter = 3.89764; //3.77953;
    double circumference = diameter * 3.14;
    double andyMark40Tics = 1120;
    double andyMark20Tics = 537.6;
-   double yellowJacketTics = 537.7;
+   double yellowJacketTics = 463; //537.7;
    public static final String VUFORIA_KEY =
            "Afctxlz/////AAABmSWf4jOsTUHcsOYa/JfaZlRo+3yiPN8cCUH4BDLpIZ8FAt0tEVLJ/mxWUyd7f0gqd+a7JRTMYP9+A9s1nojOs9B1ZGOFsvr84RZnbVN8cGP7RFKNP4Mg0Pr/6vIUmHGFx/jrOrXz/YJXwVXvPpqr1uDm8xpBZOE4j+CtQcKW2Y2zjVWHWRTkmb6ve/R91k3jfjaH4PErbZMcvD7Xy5IesqSet3/pjeUXWSnlHmPwH7fgUcHSkAf0Fj2nLvZ7zmpT8vh9rSKri9XD3A64WBNRO+6+SGH/C/eS3mWLmdi5ZMbSK66WuvNhAPT0SHCzzqAlAf2P6asrrrAuw+aQ0B2HV0mPtGdNPe62djhu5Afa/rL+";
    double integral = 0;
    double lastError = 0;
-   double Distance;
+   //double Distance;
    double grabberOpenPos = 0;
    double grabberClosePos = 0.36;
-   double totalRotations = Distance / circumference;
-   double rotationDistanceofWheel = (andyMark40Tics * totalRotations);
+   //double totalRotations = Distance / circumference;
+   //double rotationDistanceofWheel = (andyMark40Tics * totalRotations);
    double robotSpeed = 0.5;
 
    public static PIDCoefficients pidC = new PIDCoefficients(5, 1, 0);
@@ -124,6 +124,48 @@ class PushBot2022 {
       backRightMec.setPower(power);
       backLeftMec.setPower(-power);
    }
+
+   public void moveForwardInches(double Distance, double power){
+      frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      backLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      backRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+      frontLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      frontRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      backLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      backRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+      double totalRotations = Distance / circumference;
+      double rotationDistanceofWheel = (yellowJacketTics * totalRotations);
+
+      boolean runRobot = true;
+      while (runRobot) {
+         if (Math.abs(frontRightMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(frontLeftMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(backLeftMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(backRightMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)) {
+            frontLeftMec.setPower(0);
+            backLeftMec.setPower(0);
+            frontRightMec.setPower(0);
+            backRightMec.setPower(0);
+            runRobot = false;
+         } else {
+            if (Distance > 0) {
+               frontLeftMec.setPower(-power);
+               frontRightMec.setPower(-power);
+               backLeftMec.setPower(-power);
+               backRightMec.setPower(-power);
+            } else if (Distance < 0) {
+               frontLeftMec.setPower(power);
+               frontRightMec.setPower(power);
+               backRightMec.setPower(power);
+               backLeftMec.setPower(power);
+            }
+         }
+      }
+   }
+
    public void flank(double degrees, double power) {
       frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -191,6 +233,47 @@ class PushBot2022 {
       frontRightMec.setPower(-power);
       backLeftMec.setPower(-power);
       backRightMec.setPower(power);
+   }
+
+   public void moveSideInches(double Distance, double power){
+      double totalRotations = Distance / circumference;
+      double rotationDistanceofWheel = (yellowJacketTics * totalRotations);
+
+      frontLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      frontRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      backRightMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      backLeftMec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+      frontLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      frontRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      backLeftMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      backRightMec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+      boolean runRobot = true;
+      while (runRobot) {
+         if (Math.abs(frontRightMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(frontLeftMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(backLeftMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                 || Math.abs(backRightMec.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)) {
+            frontLeftMec.setPower(0);
+            backLeftMec.setPower(0);
+            frontRightMec.setPower(0);
+            backRightMec.setPower(0);
+            runRobot = false;
+         } else {
+            if (Distance > 0) {
+               frontLeftMec.setPower(-power);
+               frontRightMec.setPower(power);
+               backLeftMec.setPower(power);
+               backRightMec.setPower(-power);
+            } else if (Distance < 0) {
+               frontLeftMec.setPower(power);
+               frontRightMec.setPower(-power);
+               backLeftMec.setPower(-power);
+               backRightMec.setPower(power);
+            }
+         }
+      }
    }
 
    public void LinearSlide(double power){
