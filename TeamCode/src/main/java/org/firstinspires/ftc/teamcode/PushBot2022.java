@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -17,9 +18,10 @@ class PushBot2022 {
    public Servo grabber;
    public DcMotor frontLeftMec, frontRightMec, backRightMec, backLeftMec;
    public DcMotor linearLeft, linearRight;
-   //public TouchSensor Limit;
+   public TouchSensor Limit;
    double spinDiameter = 1;
    double diameter = 3.89764; //3.77953;
+   double spindleCircumference = 1.5 * 3.14159;
    double circumference = diameter * 3.14;
    double andyMark40Tics = 1120;
    double andyMark20Tics = 537.6;
@@ -109,6 +111,8 @@ class PushBot2022 {
 
       grabber=hwMap.get(Servo.class,"grabber");
       grabber.setPosition(grabberOpenPos);
+
+      Limit=hwMap.get(TouchSensor.class, "Limit");
    }
 
    public void moveForward(double power) {
@@ -279,6 +283,48 @@ class PushBot2022 {
    public void LinearSlide(double power){
       linearLeft.setPower(-power);
       linearRight.setPower(-power);
+   }
+   public void LinearSlideEnc(double power, int height){
+      double totalRotations = height / spindleCircumference;
+      double rotationDistanceofWheel = (yellowJacketTics * totalRotations);
+
+      linearLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      linearRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+      boolean runRobot = true;
+      while (runRobot) {
+         if (linearRight.getCurrentPosition() <= rotationDistanceofWheel || linearLeft.getCurrentPosition() <= rotationDistanceofWheel) {
+            if (Math.abs(linearRight.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)
+                    || Math.abs(linearLeft.getCurrentPosition()) > Math.abs(rotationDistanceofWheel)) {
+               linearRight.setPower(0);
+               linearLeft.setPower(0);
+               runRobot = false;
+            } else {
+               if (height > 0) {
+                  linearLeft.setPower(power);
+                  linearRight.setPower(-power);
+               } else if (height < 0) {
+                  linearRight.setPower(power);
+                  linearLeft.setPower(-power);
+               }
+            }
+         } else {
+            if (Math.abs(linearRight.getCurrentPosition()) < Math.abs(rotationDistanceofWheel)
+                    || Math.abs(linearLeft.getCurrentPosition()) < Math.abs(rotationDistanceofWheel)) {
+               linearRight.setPower(0);
+               linearLeft.setPower(0);
+               runRobot = false;
+            } else {
+               if (height < 0) {
+                  linearLeft.setPower(power);
+                  linearRight.setPower(-power);
+               } else if (height > 0) {
+                  linearRight.setPower(power);
+                  linearLeft.setPower(-power);
+               }
+            }
+         }
+      }
    }
    public void PIDTot (double targetV){
       PIDfl(targetV);

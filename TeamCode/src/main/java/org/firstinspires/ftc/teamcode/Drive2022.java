@@ -37,31 +37,6 @@ public class Drive2022 extends LinearOpMode {
                 //bot.PIDTurn(gamepad1.right_stick_x);
                 bot.turn(gamepad1.right_stick_x * bot.robotSpeed);
             }
-            /*if (gamepad1.right_stick_x > 0 && gamepad1.right_stick_y > 0) {
-                //move forward diagonally to the right
-               // bot.PIDfr(.9);
-               // bot.PIDbl(.9);
-                bot.frontRightMec.setPower(1);
-                bot.backLeftMec.setPower(1);
-            }else if (gamepad1.right_stick_x > 0 && gamepad1.right_stick_y < 0) {
-                //move backward diagonally to the right
-               // bot.PIDfl(-.9);
-               // bot.PIDbr(-.9);
-                bot.frontLeftMec.setPower(-1);
-                bot.backRightMec.setPower(-1);
-            }else if (gamepad1.right_stick_x < 0 && gamepad1.right_stick_y > 0) {
-                //move forward diagonally to the left
-              //  bot.PIDfl(.9);
-               // bot.PIDbr(.9);
-                bot.frontLeftMec.setPower(1);
-                bot.backRightMec.setPower(1);
-            }else if (gamepad1.right_stick_x < 0 && gamepad1.right_stick_y < 0) {
-                //move backward diagonally to the left
-               // bot.PIDfr(-.9);
-               // bot.PIDbl(-.9);
-                bot.frontRightMec.setPower(-1);
-                bot.backLeftMec.setPower(-1);
-            }else */
             if (gamepad1.left_stick_x != 0){
                 bot.moveSide(-gamepad1.left_stick_x * bot.robotSpeed);
             }
@@ -86,17 +61,49 @@ public class Drive2022 extends LinearOpMode {
 
             //Move linear slide up and down
             if (gamepad2.left_stick_y > 0){
-                bot.linearRight.setPower(gamepad2.left_stick_y);
-                bot.linearLeft.setPower(gamepad2.left_stick_y);
+                if (bot.Limit.isPressed()) {
+                    bot.linearRight.setPower(0);
+                    bot.linearLeft.setPower(0);
+                } else {
+                    bot.linearRight.setPower(gamepad2.left_stick_y);
+                    bot.linearLeft.setPower(gamepad2.left_stick_y);
+                }
             }
             if (gamepad2.left_stick_y < 0){
-                bot.linearRight.setPower(gamepad2.left_stick_y / 2);
-                bot.linearLeft.setPower(gamepad2.left_stick_y / 2);
+                bot.linearRight.setPower(gamepad2.left_stick_y);
+                bot.linearLeft.setPower(gamepad2.left_stick_y);
             }
             else {
                 bot.linearRight.setPower(0);
                 bot.linearLeft.setPower(0);
             }
+
+
+
+            /*if (bot.Limit.isPressed())
+            {
+                if (gamepad2.left_stick_y < 0){
+                    bot.LinearSlide(0);
+                }
+                /*bot.linearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                bot.linearLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            }*/
+            /*if (gamepad2.dpad_right = true)
+            {
+                bot.LinearSlideEnc(1,0);
+            }
+            else if (gamepad2.dpad_down = true)
+            {
+                bot.LinearSlideEnc(1, 12);
+            }
+            else if (gamepad2.dpad_left = true)
+            {
+                bot.LinearSlideEnc(1, 22);
+            }
+            else if (gamepad2.dpad_up = true)
+            {
+                bot.LinearSlideEnc(1, 32);
+            }*/
         }
     }
 }

@@ -23,68 +23,140 @@ public class Auto_left extends LinearOpMode {
                 telemetry.update();
                 t = t + 1;
             }
+
             bot.grabber.setPosition(bot.grabberClosePos);
-            sleep(1000);
-            bot.moveForward(.75);
-            sleep(1125);
-            //At the last tile in the zone
-            bot.moveForward(0);
+            sleep(100);
+
+            //Drive Forward
+            bot.moveForwardInches(55.5, .75);
             sleep(500);
+
             //raise linear slide
             bot.LinearSlide(1);
-            sleep(1500);
+            sleep(1400);
             bot.LinearSlide(0);
             sleep(200);
-            //Move in front of ground station
-            bot.moveSide(-1);
-            sleep(375);
-            bot.moveSide(0);
-            sleep(2000);
+
+            //Move right
+            bot.moveSideInches(15,.5);
+            sleep (1000);
+
+            //lower linear slide a little
             bot.LinearSlide(-0.25);
             sleep(200);
             bot.LinearSlide(0);
             sleep(1000);
+
             //drop cone
             bot.grabber.setPosition(bot.grabberOpenPos);
             sleep(1000);
+
+            //lower linear slide
             bot.LinearSlide(-.75);
-            sleep(1250);
+            sleep(800);
             bot.LinearSlide(0);
             sleep(200);
-            /*
-            bot.moveSide(1);
-            sleep(700);
-            bot.moveSide(0);
-            sleep(100);
-            bot.turn(0.75);
-            sleep(300);
+
+            //move to cone stack
+            bot.moveSideInches(10,1);
+            sleep(200);
+
+            //turn to face cones
+            bot.turn(-0.75);
+            sleep(625);
             bot.turn(0);
-            bot.LinearSlide(1);
-            sleep(200);
+            sleep(100);
+
+            //move to cone stack
+            bot.moveForwardInches(30,.75);
+            sleep(300);
+
+            //move to grab cone
+            bot.moveForwardInches(1.5,0.75);
+            sleep(100);
+
+            //grab cone
+            bot.grabber.setPosition(bot.grabberClosePos);
+            sleep(500);
+
+            //raise cone up
+            bot.LinearSlide(0.75);
+            sleep(500);
             bot.LinearSlide(0);
-            bot.grabberClosePos
-            */
+            sleep(100);
+
+            //turn to tall pole
+            bot.turn(.75);
+            sleep(100);
+            bot.turn(0);
+            sleep(100);
+
+            //move to tall pole
+            bot.moveForwardInches(41, -.5);
+            sleep(100);
+
+            //move linear slide up
+            bot.LinearSlide(0.75);
+            sleep(1150);
+            bot.LinearSlide(0);
+            sleep(100);
+
+            //turn cone over pole
+            bot.turn(0.75);
+            sleep(550);
+            bot.turn(0);
+            sleep(500);
+
+            /*bot.moveForwardInches(4,-0.5);
+            sleep(500);*/
+
+            //drop cone
+            bot.grabber.setPosition(bot.grabberOpenPos);
+            sleep(200);
+
+            /*bot.moveForwardInches(4,0.5);
+            sleep(200);*/
+
+            //turn to stack
+            bot.turn(-0.75);
+            sleep(505);
+            bot.turn(0);
+            sleep(200);
+
+            //bring linear slide down
+            bot.LinearSlide(-0.75);
+            sleep(800);
+            bot.LinearSlide(0);
+            sleep(100);
+
+            /*//move to stack
+            bot.moveForwardInches(40, .5);
+            sleep(200);
+
+            bot.grabber.setPosition(bot.grabberClosePos);
+            sleep(200);
+*/
+
+            //bot.place = "THREE";
             if (bot.place == "ONE"){
-                bot.moveSide(1);
-                sleep(800);
-                bot.moveSide(0);
-                sleep(200);
-                bot.moveForward(-.25);
-                sleep(500);
-                bot.moveForward(0);
+                //Move left
+                bot.moveForwardInches(45,.75);
+                sleep (1000);
+
+                /*//Move backwards a little
+                bot.moveForwardInches(2, -.5);
+                sleep(500);*/
             }
             if (bot.place == "TWO"){
-                bot.moveSide(1);
-                sleep(300);
-                bot.moveSide(0);
-
+                //Move left
+                bot.moveForwardInches(13,.75);
+                sleep (1000);
             }
             if (bot.place == "THREE"){
-                bot.moveSide(-1);
-                sleep(400);
-                bot.moveSide(0);
+                //Move right
+                bot.moveForwardInches(13,-.75);
+                sleep (1000);
             }
-            //bot.PIDX(48);
             sleep(30000);
         }
     }
