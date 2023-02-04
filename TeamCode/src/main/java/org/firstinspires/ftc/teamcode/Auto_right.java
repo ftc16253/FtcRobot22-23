@@ -33,17 +33,17 @@ public class Auto_right extends LinearOpMode {
 
             //raise linear slide
             bot.LinearSlide(1);
-            sleep(1400);
+            sleep(1600);
             bot.LinearSlide(0);
             sleep(200);
 
             //Move left
-            bot.moveSideInches(15,.5);
-            sleep (1000);
+            bot.moveSideInches(15,-.5);
+            sleep (2000);
 
             //lower linear slide a little
             bot.LinearSlide(-0.25);
-            sleep(200);
+            sleep(400);
             bot.LinearSlide(0);
             sleep(1000);
 

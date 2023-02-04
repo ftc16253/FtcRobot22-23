@@ -28,24 +28,25 @@ public class Auto_left extends LinearOpMode {
             sleep(100);
 
             //Drive Forward
-            bot.moveForwardInches(55.5, .75);
+            bot.moveForwardInches(57, .75);
             sleep(500);
 
             //raise linear slide
             bot.LinearSlide(1);
-            sleep(1400);
+            sleep(1625);
             bot.LinearSlide(0);
             sleep(200);
 
             //Move right
-            bot.moveSideInches(15,.5);
+            bot.moveSideInches(17,.5);
             sleep (1000);
+            sleep(1000);
 
-            //lower linear slide a little
-            bot.LinearSlide(-0.25);
+            //lower linear slide
+            bot.LinearSlide(-1);
             sleep(200);
             bot.LinearSlide(0);
-            sleep(1000);
+            sleep(200);
 
             //drop cone
             bot.grabber.setPosition(bot.grabberOpenPos);
@@ -53,17 +54,17 @@ public class Auto_left extends LinearOpMode {
 
             //lower linear slide
             bot.LinearSlide(-.75);
-            sleep(800);
+            sleep(1000);
             bot.LinearSlide(0);
             sleep(200);
 
             //move to cone stack
-            bot.moveSideInches(10,1);
+            bot.moveSideInches(5,-1);
             sleep(200);
 
             //turn to face cones
             bot.turn(-0.75);
-            sleep(625);
+            sleep(630);
             bot.turn(0);
             sleep(100);
 
@@ -84,31 +85,37 @@ public class Auto_left extends LinearOpMode {
             sleep(500);
             bot.LinearSlide(0);
             sleep(100);
-
+/*
             //turn to tall pole
             bot.turn(.75);
             sleep(100);
             bot.turn(0);
             sleep(100);
-
+*/
             //move to tall pole
             bot.moveForwardInches(41, -.5);
             sleep(100);
 
             //move linear slide up
             bot.LinearSlide(0.75);
-            sleep(1150);
+            sleep(1450);
             bot.LinearSlide(0);
             sleep(100);
 
             //turn cone over pole
             bot.turn(0.75);
-            sleep(550);
+            sleep(585);
             bot.turn(0);
-            sleep(500);
+            sleep(2000);
 
             /*bot.moveForwardInches(4,-0.5);
             sleep(500);*/
+
+            //lower cone over pole
+            bot.LinearSlide(-0.75);
+            sleep(200);
+            bot.LinearSlide(0);
+            sleep(2000);
 
             //drop cone
             bot.grabber.setPosition(bot.grabberOpenPos);
@@ -119,7 +126,7 @@ public class Auto_left extends LinearOpMode {
 
             //turn to stack
             bot.turn(-0.75);
-            sleep(505);
+            sleep(555);
             bot.turn(0);
             sleep(200);
 
@@ -140,7 +147,7 @@ public class Auto_left extends LinearOpMode {
             //bot.place = "THREE";
             if (bot.place == "ONE"){
                 //Move left
-                bot.moveForwardInches(45,.75);
+                bot.moveForwardInches(42.5,.75);
                 sleep (1000);
 
                 /*//Move backwards a little
@@ -154,7 +161,7 @@ public class Auto_left extends LinearOpMode {
             }
             if (bot.place == "THREE"){
                 //Move right
-                bot.moveForwardInches(13,-.75);
+                bot.moveForwardInches(10,-.75);
                 sleep (1000);
             }
             sleep(30000);
